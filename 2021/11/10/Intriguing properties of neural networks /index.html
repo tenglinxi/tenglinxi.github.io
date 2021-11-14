@@ -16,7 +16,7 @@
 <meta property="og:description" content="神经网络有趣的性质0.摘要深度神经网络是具有高度表现力的模型，最近在语音和视觉识别任务上取得了最先进的表现。 虽然他们的表现力是他们成功的原因，但这也使他们学习了可能具有反直觉特性的无法解释的解决方案。 在本文中，我们报告了两个这样的属性。 首先，根据单元分析 (unit analysis) 的各种方法，我们发现单个高级单元和高级单元的随机线性组合之间没有区别。 它表明在 神经网络的高层中包含语义">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-10T14:49:29.000Z">
-<meta property="article:modified_time" content="2021-11-12T11:37:04.094Z">
+<meta property="article:modified_time" content="2021-11-14T12:34:57.876Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="对抗样本">
 <meta name="twitter:card" content="summary">
@@ -48,7 +48,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="https://github.com/tenglinxi/tenglinxi.github.io/blob/master/img/a.jpg" class="js-avatar">
+			<img src="" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/"></a></h1>
@@ -82,7 +82,7 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="https://github.com/tenglinxi" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
 		        
 					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 		        
@@ -106,7 +106,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="https://github.com/tenglinxi/tenglinxi.github.io/blob/master/img/a.jpg" class="js-avatar">
+				<img src="" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author"></h1>
@@ -123,7 +123,7 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/tenglinxi" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
 			        
 						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 			        
@@ -179,28 +179,77 @@
 <p>首先，根据单元分析 (unit analysis) 的各种方法，我们发现单个高级单元和高级单元的随机线性组合之间没有区别。 它表明在<font color='red'> 神经网络的高层中包含语义信息的是空间，而不是单个单元。</font></p>
 <p>其次，我们发现深度神经网络在很大程度上学习了相当不连续的输入-输出映射。 我们可以<font color='red'>通过应用某种难以察觉的扰动来导致网络对图像进行错误分类</font>，这是通过最大化网络的预测误差来发现的。 此外，这些扰动的特定性质不是学习的随机产物：相同的扰动会导致在数据集的不同子集上训练的不同网络对相同输入进行错误分类。</p>
 <span id="more"></span>
-
-
 <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>深度神经网络是强大的学习模型，可以在视觉和语音识别问题上取得出色的性能。 神经网络能够实现高性能，因为它们可以表达由适度数量的大规模并行非线性步骤组成的任意计算。 但是由于结果计算是通过监督学习通过反向传播自动发现的，因此可能难以解释并且可能具有违反直觉的特性。 在本文中，我们讨论了深度神经网络的两个违反直觉的特性。</p>
 <p>第一个属性与单个单元的语义有关。以前的作品通过找到最大程度激活给定单元的输入集来分析各种单元的语义。对单个单元的检查隐含假设最后一个特征层的单元形成一个区分基础，这对于提取语义信息特别有用。相反，我们在第 3 节中展示了 φ(x) 的随机投影在语义上与 φ(x) 的坐标无法区分。这对神经网络跨坐标解开变化因素的猜想提出了质疑。一般来说，似乎是整个激活空间，而不是单个单元，包含了大部分语义信息。 Mikolov 等人最近得出了一个类似但更有力的结论。用单词表示，其中表示单词的向量空间中的各个方向显示出令人惊讶的丰富的关系和类比语义编码。同时，向量表示在空间旋转之前是稳定的，因此向量表示的各个单元不太可能包含语义信息。 </p>
 <p>第二个属性与神经网络相对于其输入的小扰动的稳定性有关。 考虑一个最先进的深度神经网络，它可以很好地概括对象识别任务。 我们期望这样的网络对其输入的小扰动具有健壮性，因为小扰动不能改变图像的对象类别。 然而，我们发现对测试图像应用不可察觉的非随机扰动，可以任意改变网络的预测（见图 5）。 这些扰动是通过优化输入以最大化预测误差来发现的。 我们将如此受干扰的示例称为“<font color='red'>对抗样本”</font>。 </p>
 <p>很自然地期望最小必要扰动的精确配置是反向传播学习不同运行中出现的正常可变性的随机产物。 然而，我们发现对抗样本是相对稳健的，并且由具有不同层数、激活或在训练数据的不同子集上训练的神经网络共享。也就是说，如果我们使用一个神经网络来生成一组对抗样本，我们会发现这些样本对于另一个神经网络来说仍然难以统计，即使它是用不同的超参数训练的，或者最令人惊讶的是，当它在不同的超参数上训练时 一组例子。 </p>
 <p>这些结果表明，通过反向传播学习的深度神经网络具有非直观特征和内在盲点，其结构以非明显方式与数据分布相关联。 </p>
-<h2 id="2-框架"><a href="#2-框架" class="headerlink" title="2.框架"></a>2.框架</h2><h2 id="3-单元：φ-x"><a href="#3-单元：φ-x" class="headerlink" title="3.单元：φ(x)"></a>3.单元：φ(x)</h2><h2 id="4-神经网络中的盲点"><a href="#4-神经网络中的盲点" class="headerlink" title="4.神经网络中的盲点"></a>4.神经网络中的盲点</h2><p>到目前为止，单元级检查方法除了确认有关深度神经网络学习的表示的复杂性的某些直觉之外，几乎没有效用。 网络级检查方法在解释模型做出的分类决策的上下文中非常有用，并且可用于，例如，识别导致给定视觉输入实例正确分类的输入部分 （换句话说，可以使用经过训练的模型进行弱监督定位）。 这种全局分析很有用，因为它们可以让我们更好地理解由训练网络表示的输入到输出映射。 </p>
-<p>一般来说，<font color='red'>神经网络的输出层单元是其输入的高度非线性函数。 当它使用交叉熵损失（使用 Softmax 激活函数）进行训练时，它表示给定输入（以及目前提供的训练集）标签的条件分布。</font>有人认为神经网络的输入和输出单元之间的非线性层的深度堆栈是模型在输入空间上编码非局部泛化先验的一种方式。 换句话说，假设输出单元可以将不显着（并且可能是 non-epsilon）的概率分配给输入空间中在其附近不包含训练示例的区域。 例如，这些区域可以表示来自不同视点的相同对象，它们相对较远（在像素空间中），但仍然共享原始输入的标签和统计结构。 </p>
-<p>在这样的论点中隐含着<font color='red'>局部泛化</font>——在非常接近训练示例的地方——按预期工作。 特别的，对于给定训练输入 x 附近足够小的半径 ε &gt; 0，x + r 满足 ||r|| &lt; ε 将被模型分配高概率的正确类别。 </p>
-<p>从某种意义上说，我们所描述的是一种以有效的方式（通过优化）遍历由网络表示的流形并在输入空间中找到对抗样本的方法。 对抗样本代表流形中的低概率（高维）“口袋”，通过简单地围绕给定示例对输入进行简单随机采样，很难有效地找到这些“口袋”。 已经有各种最新的计算机视觉模型在训练期间采用输入变形来提高模型的鲁棒性和收敛速度。 然而，对于给定的例子，这些变形在统计上是低效的：它们高度相关，并且在整个模型训练中来自相同的分布。 我们提出了一种方案，以利用模型及其在对训练数据周围的局部空间进行建模的缺陷的方式使该过程具有适应性。 </p>
-<p>我们明确地将硬负挖掘与硬负挖掘联系起来，因为它在精神上很接近：在计算机视觉中，硬负挖掘包括识别模型给出的低概率的训练集示例（或其部分），但应该 而是高概率。 然后改变训练集分布以强调这种硬负，并执行进一步的模型训练。 正如将要描述的，这项工作中提出的优化问题也可以以建设性的方式使用，类似于硬负挖掘原则。 </p>
-<h3 id="4-1正式描述"><a href="#4-1正式描述" class="headerlink" title="4.1正式描述"></a>4.1正式描述</h3><h3 id="4-2实验结果"><a href="#4-2实验结果" class="headerlink" title="4.2实验结果"></a>4.2实验结果</h3><h3 id="4-3不稳定性的谱分析"><a href="#4-3不稳定性的谱分析" class="headerlink" title="4.3不稳定性的谱分析"></a>4.3不稳定性的谱分析</h3><h2 id="5-论述"><a href="#5-论述" class="headerlink" title="5.论述"></a>5.论述</h2><p>我们证明了深度神经网络在单个单元的语义及其不连续性方面都具有反直觉的特性。对抗性否定的存在似乎与神经网络实现高泛化性能的能力相矛盾。 确实，如果网络可以很好地泛化，它怎么会被这些与常规示例无法区分的具有对抗性的负样本混淆？ 可能的解释是对抗性负集的概率极低，因此在测试集中从未（或很少）观察到，但它是密集的（很像有理数），因此它几乎可以在每个 测试用例。 然而，我们并没有深入了解出现具有对抗性的负样本的出现的频率，因此这个问题应该在未来的研究中得到解决。 </p>
+<h2 id="2-框架"><a href="#2-框架" class="headerlink" title="2.框架"></a>2.框架</h2><p><strong>定义</strong>：我们用 $ x \in \mathbb{R}^{m} $  表示一个输入图像，以及某个层的 $ \phi(x) $ 激活值。 我们首先检查 $ \phi(x) $ 的图像的属性，然后我们搜索它的盲点。 </p>
+<p>我们在几个不同的网络和三个数据集上进行了大量实验： </p>
+<ul>
+<li><p>对于 MNIST 数据集，我们使用了以下架构</p>
+<ul>
+<li><p>一个简单的全连接网络，具有一个或多个隐藏层和一个 Softmax 分类器。 我们将此网络称为“FC”。 </p>
+</li>
+<li><p>在自动编码器之上训练的分类器。 我们将此网络称为“AE”。 </p>
+</li>
+</ul>
+</li>
+<li><p>ImageNet 数据集</p>
+<ul>
+<li>Krizhevsky 等人所使用的结构。我们参考了 ”AlexNet“。</li>
+</ul>
+</li>
+<li><p>10M 来自 Youtube 的数据样本 </p>
+<ul>
+<li>具有约 10 亿个可学习参数的无监督训练网络。我们参考了 “QuocNet”。</li>
+</ul>
+</li>
+</ul>
+<p>对于 MNIST 实验，我们使用权重衰减为 $ \lambda $ 的正则化。 此外，在一些实验中，我们将 MNIST 训练数据集分成两个不相交的每个数据集有 30000 个训练样本的数据集 $P_{1}$ 和 $P_{2}$  。 </p>
+<h2 id="3-单元：φ-x"><a href="#3-单元：φ-x" class="headerlink" title="3.单元：φ(x)"></a>3.单元：φ(x)</h2><h2 id="4-神经网络中的盲点"><a href="#4-神经网络中的盲点" class="headerlink" title="4.神经网络中的盲点"></a>4.神经网络中的盲点</h2><p>到目前为止，单元级检查方法除了确认有关由深度神经网络学习的可表示的复杂性的某些直觉之外，几乎没有效用。 全局的网络级检查方法在解释模型做出的分类决策的上下文中非常有用，并且可用于，例如，识别导致给定输入实例正确分类的输入部分 （换句话说，可以使用经过训练的模型进行弱监督定位）。这种全局分析很有用，因为它们可以让我们更好地理解由训练好的网络表示的输入到输出映射。 </p>
+<p>一般来说，<font color='blue'>神经网络的输出层单元是其输入的高度非线性函数。 当它使用交叉熵损失（使用 Softmax 激活函数）进行训练时，它表示给定输入（以及目前提供的训练集）标签的条件分布。</font>有人认为<a href="#refer-anchor-1"><sup>1</sup></a>神经网络的输入和输出单元之间的非线性层的深度堆栈是模型在输入空间上编码非局部泛化先验（non-local generalization prior）的一种方式。 换句话说，假设输出单元可以将不明显（并且可能是 non-epsilon）的概率分配给输入空间中在其附近不包含训练示例的区域。 例如，<font color='red'>这些区域可以表示不同观点的相同对象，它们相对较远（在像素空间中），但仍然共享原始输入的标签和统计结构</font>。 </p>
+<p>在这样的论点中隐含着<font color='red'>局部（local）泛化</font>——在非常接近训练示例的地方——按预期工作。 对于上一句话特别的，给定训练输入 x 附近足够小的半径 $ \varepsilon &gt; 0$，$ x + r $ 满足 $\Vert r \Vert &lt; \varepsilon $ 将被模型分配高概率的正确类别。 这种平滑先验通常适用于计算机视觉问题。 一般来说，给定图像的微小扰动通常不会改变潜在的类别。 </p>
+<p>我们主要结论是对于深度神经网络，作为核方法基础的<font color='red'>平滑假设</font>是不成立的。具体来说，我们表明，通过使用一个简单的优化程序，我们能够找到对抗样本，这些样本是通过对正确分类的输入图像进行难以察觉的小扰动而获得的，因此它不再被正确分类。</p>
+<p>从某种意义上说，我们所描述的是一种以有效的方式（通过优化）遍历由网络表示的流形并在输入空间中找到对抗样本的方法。 <font color='red'>对抗样本代表流形中的低概率（高维）“口袋”</font>，通过简单地围绕给定示例对输入进行简单随机采样，很难有效地找到这些“口袋”。 已经有各种最新的计算机视觉模型在训练期间采用输入变形来提高模型的鲁棒性和收敛速度。 然而，对于给定的例子，这些变形在统计上是低效的：它们高度相关，并且在整个模型训练中来自相同的分布。 我们提出了一种方案，以利用模型及其在对训练数据周围的局部空间进行建模的缺陷的方式使该过程具有适应性。 </p>
+<p>我们明确地将 $hard$-$negative  mining$ 与联系起来，因为它在 $spirt$ 上很接近：在计算机视觉中， $hard$-$negative  $$mining$ 包括识别模型给出的低概率的训练集样本（或其部分），但应该而是高概率的。 然后改变训练集分布以强调这种 $hard negatives$ ，并执行进一步的模型训练。 正如将要描述的，这项工作中提出的优化问题也可以以建设性的方式使用，类似于 $hard$-$negative  mining$ 的原则。 </p>
+<h3 id="4-1正式描述"><a href="#4-1正式描述" class="headerlink" title="4.1正式描述"></a>4.1正式描述</h3><p>我们用 $ f $ 表示：$ \mathbb{R}^{m} \to \{1…k\} $ 将图像像素值向量映射到离散标签集的分类器。我们还假设 $f$ 有一个相关的连续损失函数，用 $loss_{f}$ 表示$：\mathbb{R}^{m} × \{1…k\} \to \mathbb{R}^{+} $。 对于给定的 $x \in \mathbb{R}^{m}$ 图像和目标标签 $l \in \{1…k\}$，我们的目标是解决 以下框约束优化问题： </p>
+<ul>
+<li>根据以下条件，最小化 $ \Vert r \Vert_{2} $<ol>
+<li>$f(x+r) = l$</li>
+<li>$x+r \in [0,1]^{m}$ </li>
+</ol>
+</li>
+</ul>
+<p>极小化子（minimizer） $r$ 可能不是唯一的，但我们用 $D(x,l)$ 表示任意选择的极小化子 $x+r$。非正式地，$x + r$ 是最接近 $x$ 的图像，被 $f$ 归类为 $l$ 。 显然，$D(x, f (x)) = f (x)$，所以这个任务只有在 $f (x) \not= l $ 时才有意义。 通常，$D(x, l)$ 的精确计算是一个难题，因此我们使用 $box$-$constrained  L$-$BFGS$ 对其进行近似。 具体来说，我们通过执行线搜索来找到最小 $c &gt; 0$ 来找到 $D(x, l)$ 的近似值，对于该最小值，以下问题的最小化器 $r$ 满足 $f (x + r) = l$ 。 </p>
+<script type="math/tex; mode=display">
+Minimize \ c|r| + loss_{f} (x + r, l) \ subject \ to \ x + r ∈ [0, 1]^{m}</script><p>在凸损失的情况下，这种惩罚函数方法将产生 $D(X, l)$ 的精确解，但是神经网络通常是非凸的，因此在这种情况下我们最终会得到一个近似值。 </p>
+<h3 id="4-2实验结果"><a href="#4-2实验结果" class="headerlink" title="4.2实验结果"></a>4.2实验结果</h3><h3 id="4-3不稳定性的谱分析"><a href="#4-3不稳定性的谱分析" class="headerlink" title="4.3不稳定性的谱分析"></a>4.3不稳定性的谱分析</h3><h2 id="5-论述"><a href="#5-论述" class="headerlink" title="5.论述"></a>5.论述</h2><p>我们证明了深度神经网络在单个单元的语义及其不连续性方面都具有反直觉的特性。对抗性否定的存在似乎与神经网络实现高泛化性能的能力相矛盾。 确实，如果网络可以很好地泛化，它怎么会被这些与常规示例无法区分的具有对抗性的负样本混淆？ 可能的解释是对抗性负集的概率极低，因此在测试集中从未（或很少）观察到，但它是密集的（很像有理数），因此它几乎可以在每个 测试用例。 然而，我们并没有深入了解出现具有对抗性的负样本的出现的频率，因此这个问题应该在未来的研究中得到解决。 </p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li>首次提出了对抗样本的概念</li>
 <li>提出了对抗样本具有迁移性</li>
 </ul>
-<h1 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h1><h2 id="hard-negative-hard-negative"><a href="#hard-negative-hard-negative" class="headerlink" title="hard-negative / hard negative"></a>hard-negative / hard negative</h2><h1 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h1><ul>
+<h1 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h1><h2 id="hard-negative-hard-negative"><a href="#hard-negative-hard-negative" class="headerlink" title="hard-negative / hard negative"></a>hard-negative / hard negative</h2><h2 id="unit-level-inspection-methods"><a href="#unit-level-inspection-methods" class="headerlink" title="unit level inspection methods"></a>unit level inspection methods</h2><h2 id="network-level-inspection-methods"><a href="#network-level-inspection-methods" class="headerlink" title="network level inspection methods"></a>network level inspection methods</h2><h2 id="local-generalization"><a href="#local-generalization" class="headerlink" title="local generalization"></a>local generalization</h2><p>It is implicit in such arguments that local generalization—in the very proximity of the training examples—works as expected.</p>
+<h2 id="hard-negative-mining"><a href="#hard-negative-mining" class="headerlink" title="hard negative mining"></a>hard negative mining</h2><p>开始使用正例和负例的一个子集去训练模型，然后用这个模型预测并收集那些被错误分类的负例（也就是说，这些examples 正确的分类应该是正例）作为 hard negative 集，然后使用 hard negative 集再去训练模型，并重复这个过程。</p>
+<h2 id="box-constrained-optimization"><a href="#box-constrained-optimization" class="headerlink" title="box-constrained optimization"></a>box-constrained optimization</h2><h1 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h1><ul>
 <li>inspection n. 检查</li>
-<li>presumably 大概</li>
-<li>proximity n. 接近;(时间或空间)邻近;靠近</li>
-<li>traverse vt.横过;横越;穿过;横渡</li>
+<li>presumably adv. 大概</li>
+<li>proximity n. 接近；(时间或空间)邻近；靠近</li>
+<li>traverse vt. 横过；横越；穿过；横渡</li>
+<li>beyond prep. 除了；超过</li>
+<li>vicinity n. 周围地区;邻近地区;附近</li>
+<li>nonetheless adv. 尽管如此</li>
+<li>radius n. 半径</li>
+<li>valid adj. (法律上)有效的;(正式)认可的;符合逻辑的;合理的</li>
+<li>imperceptibly adv. 极微地；微细地；察觉不到地</li>
+<li>variety n. (同一事物的)不同种类，多种式样;变化;多样化;多变性;</li>
+<li>throughout prep. 自始至终;遍及;各处;贯穿整个时期; adv. 始终;处处;在所有方面</li>
+<li>scheme n. 计划;方案;体系;体制;阴谋;诡计;计谋 v. 密谋;秘密策划;图谋;想;认为</li>
+<li>deficiency n. 缺乏;缺少;不足;缺点;缺陷</li>
+</ul>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><div id="refer-anchor-1"></div></p>
+<ul>
+<li>[1] <a target="_blank" rel="noopener" href="http://www.iro.umontreal.ca/~lisa/pointeurs/TR1312.pdf">Restricted S ,  Related S . Learning Deep Architectures for AI</a></li>
 </ul>
 
       
@@ -305,6 +354,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/11/13/Learning%20Deep%20Architectures%20for%20AI/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Learning Deep Architectures for AI
+        
+      </div>
+    </a>
   
   
     <a href="/2021/11/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
@@ -591,5 +649,21 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 </body>
 </html>

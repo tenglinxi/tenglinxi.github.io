@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2021/11/14/EXPLAINING%20AND%20HARNESSING%20ADVERSARIAL%20EXAMPLES/</loc>
+    
+    <lastmod>2021-11-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2021/11/13/Learning%20Deep%20Architectures%20for%20AI/</loc>
+    
+    <lastmod>2021-11-14</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://example.com/2021/11/10/Intriguing%20properties%20of%20neural%20networks%20/</loc>
     
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     
   </url>
   
@@ -18,7 +32,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -26,7 +40,7 @@
   
   <url>
     <loc>http://example.com/tags/%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Hexo</title>
+  <title>EXPLAINING AND HARNESSING ADVERSARIAL EXAMPLES | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="解释和利用对抗样本0.摘要包括神经网络在内的几种机器学习模型始终错误地分类对抗样本（通过对数据集中的示例应用较小但有意的最坏情况扰动形成的输入），这样扰动的输入会导致模型以高置信度输出不正确的答案。解释这种现象的早期尝试集中在非线性和过度拟合上。相反，我们认为神经网络容易受到对抗性扰动的主要原因是它们的线性性质。这种解释得到了新的定量结果的支持，同时给出了关于它们最有趣的事实的第一个解释：它们跨架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EXPLAINING AND HARNESSING ADVERSARIAL EXAMPLES">
+<meta property="og:url" content="http://example.com/2021/11/14/EXPLAINING%20AND%20HARNESSING%20ADVERSARIAL%20EXAMPLES/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="解释和利用对抗样本0.摘要包括神经网络在内的几种机器学习模型始终错误地分类对抗样本（通过对数据集中的示例应用较小但有意的最坏情况扰动形成的输入），这样扰动的输入会导致模型以高置信度输出不正确的答案。解释这种现象的早期尝试集中在非线性和过度拟合上。相反，我们认为神经网络容易受到对抗性扰动的主要原因是它们的线性性质。这种解释得到了新的定量结果的支持，同时给出了关于它们最有趣的事实的第一个解释：它们跨架">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-14T12:10:06.000Z">
+<meta property="article:modified_time" content="2021-11-14T13:44:55.481Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="对抗样本">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -150,36 +155,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-EXPLAINING AND HARNESSING ADVERSARIAL EXAMPLES" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      EXPLAINING AND HARNESSING ADVERSARIAL EXAMPLES
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/14/EXPLAINING%20AND%20HARNESSING%20ADVERSARIAL%20EXAMPLES/" class="archive-article-date">
+
+        
+        <a href="/2021/11/14/EXPLAINING%20AND%20HARNESSING%20ADVERSARIAL%20EXAMPLES/" class="archive-article-date">
   	<time datetime="2021-11-14T12:10:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/14/EXPLAINING%20AND%20HARNESSING%20ADVERSARIAL%20EXAMPLES/">EXPLAINING AND HARNESSING ADVERSARIAL EXAMPLES</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="解释和利用对抗样本"><a href="#解释和利用对抗样本" class="headerlink" title="解释和利用对抗样本"></a>解释和利用对抗样本</h1><h2 id="0-摘要"><a href="#0-摘要" class="headerlink" title="0.摘要"></a>0.摘要</h2><p>包括神经网络在内的几种机器学习模型始终错误地分类对抗样本（通过对数据集中的示例应用较小但有意的最坏情况扰动形成的输入），这样扰动的输入会导致模型以高置信度输出不正确的答案。解释这种现象的早期尝试集中在非线性和过度拟合上。相反，我们认为神经网络容易受到对抗性扰动的主要原因是它们的线性性质。这种解释得到了新的定量结果的支持，同时给出了关于它们最有趣的事实的第一个解释：它们跨架构和训练集的泛化。此外，这种观点产生了一种简单而快速的生成对抗样本的方法。使用这种方法为对抗训练提供示例，我们减少了 $MNIST$ 数据集上 $maxout$ 网络的测试集错误。 </p>
+<span id="more"></span>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>$Szegedy$ 等人提出了一个有趣的发现：包括最先进的神经网络在内的几种机器学习模型容易受到对抗样本的影响。也就是说，这些机器学习模型错误分类的示例与从数据分布中提取的正确分类的示例仅略有不同。 在许多情况下，在训练数据的不同子集上训练的具有不同架构的各种模型错误地分类了相同的对抗样本。这表明对抗样本暴露了我们训练算法中的基本盲点。</p>
+<p>这些对抗样本的原因是个谜，推测性解释表明这是由于深度神经网络的极端非线性，可能与纯监督学习问题的模型平均和正则化不足相结合。 我们表明这些推测性假设是不必要的。 高维空间中的线性行为足以导致对抗样本。 这种观点使我们能够设计一种生成对抗样本的快速方法，使对抗性训练变得实用。我们表明，对抗性训练可以提供比单独使用 dropout 所提供的额外正则化好处。通用正则化策略（例如 dropout、预训练和模型平均）不会显着降低模型对对抗样本的脆弱性，但更改为非线性模型族（例如 RBF 网络）可以做到这一点。</p>
+<h2 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2. 相关工作"></a>2. 相关工作</h2><h2 id="3-对抗样本的线性解释"><a href="#3-对抗样本的线性解释" class="headerlink" title="3. 对抗样本的线性解释"></a>3. 对抗样本的线性解释</h2><h2 id="4-非线性模型的线性扰动"><a href="#4-非线性模型的线性扰动" class="headerlink" title="4. 非线性模型的线性扰动"></a>4. 非线性模型的线性扰动</h2><h2 id="5-线性模型的对抗训练与重量衰减"><a href="#5-线性模型的对抗训练与重量衰减" class="headerlink" title="5. 线性模型的对抗训练与重量衰减"></a>5. 线性模型的对抗训练与重量衰减</h2><h2 id="6-深度网络的对抗训练"><a href="#6-深度网络的对抗训练" class="headerlink" title="6.深度网络的对抗训练"></a>6.深度网络的对抗训练</h2><h2 id="7-不同类型的模型容量"><a href="#7-不同类型的模型容量" class="headerlink" title="7.不同类型的模型容量"></a>7.不同类型的模型容量</h2><h2 id="8-为什么对抗样本会具有泛化性？"><a href="#8-为什么对抗样本会具有泛化性？" class="headerlink" title="8.为什么对抗样本会具有泛化性？"></a>8.为什么对抗样本会具有泛化性？</h2><h2 id="9-备择假设"><a href="#9-备择假设" class="headerlink" title="9.备择假设"></a>9.备择假设</h2><h2 id="10-总结和讨论"><a href="#10-总结和讨论" class="headerlink" title="10. 总结和讨论"></a>10. 总结和讨论</h2><h2 id="11-附录A-垃圾分类案例"><a href="#11-附录A-垃圾分类案例" class="headerlink" title="11.附录A 垃圾分类案例"></a>11.附录A 垃圾分类案例</h2><h1 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h1><h2 id="regularization-正则化"><a href="#regularization-正则化" class="headerlink" title="regularization / 正则化"></a>regularization / 正则化</h2><p>凡是可以减少泛化误差而不是减少训练误差的方法都可以称为正则化方法。</p>
+<h2 id="model-averaging-模型平均"><a href="#model-averaging-模型平均" class="headerlink" title="model averaging / 模型平均"></a>model averaging / 模型平均</h2><h1 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h1><ul>
+<li>speculative adj. 投机的;投机性的;推测的;猜测的;推断的;揣摩的;忖度的;试探的;风险性的</li>
+</ul>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1>
+      
 
-        <div class="article-info info-on-right">
-          
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,111 +223,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/11/14/EXPLAINING%20AND%20HARNESSING%20ADVERSARIAL%20EXAMPLES/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/13/Learning%20Deep%20Architectures%20for%20AI/" class="archive-article-date">
-  	<time datetime="2021-11-13T09:36:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/13/Learning%20Deep%20Architectures%20for%20AI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Learning Deep Architectures for AI</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/13/Learning%20Deep%20Architectures%20for%20AI/">Learning Deep Architectures for AI</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/10/Intriguing%20properties%20of%20neural%20networks%20/" class="archive-article-date">
-  	<time datetime="2021-11-10T14:49:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/10/Intriguing%20properties%20of%20neural%20networks%20/">Intriguing properties of neural networks</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">对抗样本</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/10/hello-world/" class="archive-article-date">
-  	<time datetime="2021-11-10T13:49:56.066Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/10/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -318,8 +345,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
